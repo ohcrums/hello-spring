@@ -8,40 +8,58 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class HelloController {
 
-    @GetMapping
-        public String hello(){
-        return "Hello, Spring";
-    }
-
-    @GetMapping("goodbye")
-    public String goodbye(){
-        return "Goodbye, Spring";
-    }
-
-    // http://localhost:8080/hello?name=Zak
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
-    public String helloWithQueryParam(@RequestParam String name){
-        return "Hello, " + name + "...";
-    }
-
-    // handles request with path
-    @GetMapping("hello/{name}")
-    public String helloWithPathParam(@PathVariable String name){
-        return "Hello" + name + "...";
-    }
-
-    @GetMapping("form")
+    @GetMapping("")
     public String helloForm(){
         return "<html>" +
-                "<body>" +
-                "<form action='hello' method='post'>" + //submit POST request to /hello
-                "<input type='text' name='name'>" +
-                "<input type='submit' value='Greet Me'>" +
-                "</form>" +
-                "</body>" +
+                    "<body>" +
+                        "<form action='hello' method='post'>" + //submit POST request to /hello
+                            "<input type='text' name='name'>" +
+                                "<select name='language' id='lang'>" +
+                                    "<option value=''>Select a language</option>" +
+                                    "<option value='eng'>English</option>" +
+                                    "<option value='fr'>French</option>" +
+                                    "<option value='sp'>Spanish</option>" +
+                                    "<option value='it'>Italian</option>" +
+                                    "<option value='kl'>Klingon</option>" +
+                                "</select>" +
+                            "<input type='submit' value='Greet Me'>" +
+                        "</form>" +
+                    "</body>" +
                 "</html>";
     }
 
+    @RequestMapping(value="hello", method = RequestMethod.POST)
+    @ResponseBody
+    public String helloPost(@RequestParam String name, @RequestParam String language) {
+        if (name == null || name.isEmpty()) {
+            name = "World";
+        }
+        if (language == ""){
+            language = "kl";
+        }
+        return createMessage(name, language);
+    }
 
+    public static String createMessage(String n, String l) {
+        String greeting = "";
+
+        if (l.equals("eng")) {
+            greeting = "Hello";
+        }
+        else if (l.equals("fr")) {
+            greeting = "Bonjour";
+        }
+        else if (l.equals("it")) {
+            greeting = "Bonjourno";
+        }
+        else if (l.equals("sp")) {
+            greeting = "Hola";
+        }
+        else if (l.equals("kl")) {
+            greeting = "nuqneH";
+        }
+
+        return greeting + " " + n;
+    }
 
 }
