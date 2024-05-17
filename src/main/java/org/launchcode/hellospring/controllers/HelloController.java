@@ -1,6 +1,7 @@
 package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -35,16 +36,26 @@ public class HelloController {
     }
 
     @GetMapping("form")
-    @ResponseBody
     public String helloForm() {
-        return "<html>" +
-                "<body>" +
-                "<form action = 'hello' method = 'post'>" + // submit a request to /hello
-                "<input type = 'text' name = 'name' >" +
-                "<input type = 'submit' value = 'Greet Me!' >" +
-                "</form>" +
-                "</body>" +
-                "</html>";
+        return "form";
+    }
+
+    @GetMapping("what")
+    public String iterativeMethod(Model model) {
+        String[] coffeeOptions = new String[]{"French Roast", "Espresso", "Kopi Luwak", "Instant"};
+
+        model.addAttribute("coffeeOptions", coffeeOptions);
+
+        return "iterative";
+    }
+
+    @GetMapping("blocky")
+    public String blockyMethod(Model model) {
+        String[] coffeeOptions = new String[]{"French Roast", "Espresso", "Kopi Luwak", "Instant"};
+
+        model.addAttribute("coffeeOptions", coffeeOptions);
+
+        return "blocky";
     }
 
 }

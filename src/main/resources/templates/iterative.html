@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+<div>
+    <h3>Java Types</h3>
+    <ol>
+        <li th:each="item : ${coffeeOptions}" th:text="${item}"></li>
+    </ol>
+</div>
+<div>
+    <h3>Java Types</h3>
+    <ol th:each="item : ${coffeeOptions}">
+        <li th:text="${item}"></li>
+    </ol>
+</div>
+<div th:each="item : ${coffeeOptions}">
+    <h3>Java Types</h3>
+    <ol>
+        <li th:text="${item}"></li>
+    </ol>
+</div>
+
+</body>
+</html>

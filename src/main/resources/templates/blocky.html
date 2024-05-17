@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+    <th:block th:each="coffee : ${coffeeOptions}">
+        <h3>I'm a header</h3>
+        <p>And I'm text!</p>
+        <hr />
+    </th:block>
+</body>
+</html>
